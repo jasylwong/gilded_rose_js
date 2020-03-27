@@ -4,32 +4,51 @@ describe("Gilded Rose", function() {
     const guanciale = new Item("Guanciale", 1, 1) 
     const agedBrie = new Item("Aged Brie", 2, 1) 
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 1) 
-    const gildedRose = new Shop( [guanciale, agedBrie, backstagePass]);
+    const conjured = new Item("Conjured", 4, 1) 
+    const gildedRose = new Shop( [guanciale, agedBrie, backstagePass, conjured]);
     const items = gildedRose.updateQuality();
 
     it("have sellIn decrease by one after update", function() {
       expect(items[0].sellIn).toEqual(0);
       expect(items[1].sellIn).toEqual(1);
       expect(items[2].sellIn).toEqual(2);
+      expect(items[3].sellIn).toEqual(3);
     });
   })
 
-  describe("Normal item", function() {
+
+  describe("Conjured item", function() {
+    const conjured1 = new Item("Conjured", 2, 7);
+    const conjured2 = new Item("Conjured", 0, 6);
+    const conjured3 = new Item("Conjured", -1, 1);
+    const gildedRose = new Shop([conjured1, conjured2, conjured3]);
+    const items = gildedRose.updateQuality();
+
+  it("reduces in quality by two each update", function() {
+    expect(items[0].quality).toEqual(5);
+  });
+
+  it("reduces in quality by four if at or passed sell by date", function() {
+    expect(items[1].quality).toEqual(2);
+  });
+
+  it("can't have negative quality", function() {
+    expect(items[2].quality).toBeGreaterThanOrEqual(0);
+  });
+});
+
+  describe("Other item", function() {
       const manchego = new Item("manchego", 2, 7);
       const artichoke = new Item("artichoke", 0, 6);
-      const anchovies = new Item("anchovies", -1, 1);
+      const anchovies = new Item("anchovies", -1, 0);
       const gildedRose = new Shop([manchego, artichoke, anchovies]);
       const items = gildedRose.updateQuality();
-
-    it("sellIn reduces by one each update", function() {
-      expect(items[0].sellIn).toEqual(1);
-    });
 
     it("reduces in quality by one each update", function() {
       expect(items[0].quality).toEqual(6);
     });
 
-    it("reduces in quality by two if at or past sellIn date", function() {
+    it("reduces in quality by two if at or passed sell by date", function() {
       expect(items[1].quality).toEqual(4);
     });
 
@@ -45,7 +64,7 @@ describe("Gilded Rose", function() {
       expect(items[0].quality).toEqual(6);
     })
 
-    it("increases in quality by two each update at or after sellIn date", function() {
+    it("increases in quality by two each update at or after sell by date", function() {
       const gildedRose = new Shop([ new Item("Aged Brie", 0, 5)]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toEqual(7);

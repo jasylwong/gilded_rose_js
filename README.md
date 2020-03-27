@@ -14,7 +14,6 @@ Sulfuras
 * Never changes in quality (always 80)
 * Never has to be sold
 
-
 Aged Brie
 * Quality increases by one
 * Once the sell by date has passed, Quality increases twice as fast
