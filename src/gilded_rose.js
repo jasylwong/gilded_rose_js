@@ -1,70 +1,67 @@
 class Item {
-  constructor(name, sellIn, quality){
-    this.name = name;
-    this.sellIn = sellIn;
-    this.quality = quality;
+  constructor (name, sellIn, quality) {
+    this.name = name
+    this.sellIn = sellIn
+    this.quality = quality
   }
 }
 
-class Shop {
-  constructor(items=[]){
-    this.items = items;
-  }
-  updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].name === "Sulfuras, Hand of Ragnaros") { continue; }
-      
-      if (this.items[i].name === 'Aged Brie') {
-        this.increaseQuality(this.items[i]);
-      }
+function Shop (items = []) {
+  this.items = items
+}
 
-      if (this.items[i].name === 'Backstage passes to a TAFKAL80ETC concert') {
-        this.backstagePass(this.items[i]);
-      }
-
-      if (!['Aged Brie', "Backstage passes to a TAFKAL80ETC concert"].includes(this.items[i].name) ) {
-        this.decreaseQuality(this.items[i]);
-      }
-
-      if (this.items[i].name === 'Conjured') {
-        this.decreaseQuality(this.items[i]);
-      }
-
-      this.items[i].sellIn --;
-
-      this.items[i].quality = Math.min(this.items[i].quality, 50);
-      this.items[i].quality = Math.max(this.items[i].quality, 0);
-    }
-    return this.items;
+Shop.prototype.updateQuality = function () {
+  const increaseQuality = function (item) {
+    item.quality += qualityChangeRate(item)
   }
 
-
-  increaseQuality(item) {
-    item.quality += this.qualityChangeRate(item);
+  const decreaseQuality = function (item) {
+    item.quality -= qualityChangeRate(item)
   }
 
-  decreaseQuality(item) {
-    item.quality -= this.qualityChangeRate(item);
+  const qualityChangeRate = function (item) {
+    return passedSellByDate(item) ? 2 : 1
   }
 
-  qualityChangeRate(item) {
-    return this.passedSellByDate(item) ? 2 : 1;
-  }
-
-  backstagePass(item) {
-    let shop = this;
-    if (item.sellIn >= 11 ) {
-      this.increaseQuality(item)
+  const backstagePass = function (item) {
+    if (item.sellIn >= 11) {
+      increaseQuality(item)
     } else if (item.sellIn >= 6) {
-      [1, 2].forEach(function() { shop.increaseQuality(item); });
+      [1, 2].forEach(function () { increaseQuality(item) })
     } else if (item.sellIn > 0) {
-      [1, 2, 3].forEach(function() { shop.increaseQuality(item); });
+      [1, 2, 3].forEach(function () { increaseQuality(item) })
     } else {
       item.quality = 0
     }
   }
 
-  passedSellByDate(item) {
-    return item.sellIn <= 0;
+  const passedSellByDate = function (item) {
+    return item.sellIn <= 0
   }
+
+  for (var i = 0; i < this.items.length; i++) {
+    if (this.items[i].name === 'Sulfuras, Hand of Ragnaros') { continue }
+
+    if (this.items[i].name === 'Aged Brie') {
+      increaseQuality(this.items[i])
+    }
+
+    if (this.items[i].name === 'Backstage passes to a TAFKAL80ETC concert') {
+      backstagePass(this.items[i])
+    }
+
+    if (!['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'].includes(this.items[i].name)) {
+      decreaseQuality(this.items[i])
+    }
+
+    if (this.items[i].name.includes('Conjured')) {
+      decreaseQuality(this.items[i])
+    }
+
+    this.items[i].sellIn--
+
+    this.items[i].quality = Math.min(this.items[i].quality, 50)
+    this.items[i].quality = Math.max(this.items[i].quality, 0)
+  }
+  return this.items
 }

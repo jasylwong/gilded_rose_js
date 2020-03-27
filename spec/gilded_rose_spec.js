@@ -4,7 +4,7 @@ describe("Gilded Rose", function() {
     const guanciale = new Item("Guanciale", 1, 1) 
     const agedBrie = new Item("Aged Brie", 2, 1) 
     const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 1) 
-    const conjured = new Item("Conjured", 4, 1) 
+    const conjured = new Item("Conjured Mana Cake", 4, 1) 
     const gildedRose = new Shop( [guanciale, agedBrie, backstagePass, conjured]);
     const items = gildedRose.updateQuality();
 
@@ -18,9 +18,9 @@ describe("Gilded Rose", function() {
 
 
   describe("Conjured item", function() {
-    const conjured1 = new Item("Conjured", 2, 7);
-    const conjured2 = new Item("Conjured", 0, 6);
-    const conjured3 = new Item("Conjured", -1, 1);
+    const conjured1 = new Item("Conjured Mana Cake", 2, 7);
+    const conjured2 = new Item("Conjured Mana Bread", 0, 6);
+    const conjured3 = new Item("Conjured Mana Donut", -1, 1);
     const gildedRose = new Shop([conjured1, conjured2, conjured3]);
     const items = gildedRose.updateQuality();
 
