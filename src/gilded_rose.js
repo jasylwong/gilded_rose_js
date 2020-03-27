@@ -10,28 +10,6 @@ class Shop {
   constructor(items=[]){
     this.items = items;
   }
-
-  increaseQuality(item) {
-    item.quality += this.qualityChangeRate(item);
-  }
-
-  decreaseQuality(item) {
-    item.quality -= this.qualityChangeRate(item);
-  }
-
-  qualityChangeRate(item) {
-    return this.passedSellByDate(item) ? 2 : 1;
-  }
-
-  backstagePass(item) {
-    item.quality += Math.max( Math.floor((20 - item.sellIn) / 5), 1);
-    if (this.passedSellByDate(item)) item.quality = 0;
-  }
-
-  passedSellByDate(item) {
-    return item.sellIn <= 0;
-  }
-
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].name === "Sulfuras, Hand of Ragnaros") { continue; }
@@ -58,5 +36,35 @@ class Shop {
       this.items[i].quality = Math.max(this.items[i].quality, 0);
     }
     return this.items;
+  }
+
+
+  increaseQuality(item) {
+    item.quality += this.qualityChangeRate(item);
+  }
+
+  decreaseQuality(item) {
+    item.quality -= this.qualityChangeRate(item);
+  }
+
+  qualityChangeRate(item) {
+    return this.passedSellByDate(item) ? 2 : 1;
+  }
+
+  backstagePass(item) {
+    let shop = this;
+    if (item.sellIn >= 11 ) {
+      this.increaseQuality(item)
+    } else if (item.sellIn >= 6) {
+      [1, 2].forEach(function() { shop.increaseQuality(item); });
+    } else if (item.sellIn > 0) {
+      [1, 2, 3].forEach(function() { shop.increaseQuality(item); });
+    } else {
+      item.quality = 0
+    }
+  }
+
+  passedSellByDate(item) {
+    return item.sellIn <= 0;
   }
 }
