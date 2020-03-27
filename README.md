@@ -1,6 +1,6 @@
 # Gilded Rose 🌹 
 
-[Objective](#Objective) | [Process](#process) | [Running the program](#running_the_program)
+[Objective](#Objective) | [Process](#process) | [Running the program](#running_the_program) | [Self-reflection](#self_reflection)
 
 ## Objective
 
@@ -122,3 +122,21 @@ Open the SpecRunner.html file as per the last section, and enter your preferred 
 > const gildedRose = new Shop( [guanciale, agedBrie, backstagePass, conjured]);
 > const items = gildedRose.updateQuality();
 ```
+
+## <a name="self_reflection">Self-reflection</a>
+
+I found this a really difficult task, but actually also really enjoyed it in the process. 
+It took me a while to really get to grips with what the objective was. However, once I did, the strategy
+I wanted to use came easily: 
+1. Get passing tests with the legacy code
+2. Refactor the legacy code to ensure my tests remain green
+3. Refactor my own code
+
+(Which now that I look back at it, isn't far from the original TDD cycle 😉 )
+
+It also took me quite a while to get around my head around all those nested if/else conditionals!
+What I found helpful was making each type of item a sub-title in my notepad. I then went through the code, listing each item characteristic down as I went.
+
+Another major hurdle for me was using JavaScript, with Ruby being my programming "mother tongue".
+This proved challenging for both reading the legacy code, and writing my own code. Lots of time was
+spent researching and experimenting with syntax new to me. Key finding: Ruby and JS have lots of differences!
