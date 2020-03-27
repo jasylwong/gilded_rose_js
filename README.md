@@ -1,4 +1,4 @@
-# Gilded Rose 🌹 
+# The Gilded Rose 🌹 
 
 [Objective](#Objective) | [Process](#process) | [Running the program](#running_the_program) | [Self-reflection](#self_reflection)
 
@@ -126,13 +126,13 @@ Open the SpecRunner.html file as per the last section, and enter your preferred 
 ## <a name="self_reflection">Self-reflection</a>
 
 I found this a really difficult task, but actually also really enjoyed it in the process. 
-It took me a while to really get to grips with what the objective was. However, once I did, the strategy
+It took me a while to fully get to grips with what the objective was. However, once I did, the strategy
 I wanted to use came easily: 
 1. Get passing tests with the legacy code
 2. Refactor the legacy code to ensure my tests remain green
 3. Refactor my own code
 
-(Which now that I look back at it, isn't far from the original TDD cycle 😉 )
+(Which now that I look back at it, isn't that far from the original TDD cycle 😉 )
 
 It also took me quite a while to get around my head around all those nested if/else conditionals!
 What I found helpful was making each type of item a sub-title in my notepad. I then went through the code, listing each item characteristic down as I went.
@@ -140,3 +140,8 @@ What I found helpful was making each type of item a sub-title in my notepad. I t
 Another major hurdle for me was using JavaScript, with Ruby being my programming "mother tongue".
 This proved challenging for both reading the legacy code, and writing my own code. Lots of time was
 spent researching and experimenting with syntax new to me. Key finding: Ruby and JS have lots of differences!
+
+Something else I'm still developing is the ability to make judgement calls where multiple 'good coding practices'
+may conflict. For example, I tried to keep classes and objects as short as possible, but still adhere to
+the Single Responsibility Principle. I prioritised the latter, thinking that having slightly more lines in a class would warrant having clear, simple, functions that do only one thing. This is definitely
+a skill I want to really improve on, as it will save me significant time.
