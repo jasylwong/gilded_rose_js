@@ -1,52 +1,13 @@
 # Gilded Rose 🌹 
 
+[Objective](#Objective) | [Process](#process) | [Running the program](#running_the_program)
+
 ## Objective
 
+This is based on the infamous Kata developed by [Terry Hughes](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/).
+It is included as one of the tech test exercises used by Makers in [week 10](https://github.com/makersacademy/course/tree/master/individual_challenges).
 
-
-JavaScript - Jasmine
-
-
-All
-* sellIn decreases by one
-
-Sulfuras
-* Never changes in quality (always 80)
-* Never has to be sold
-
-Aged Brie
-* Quality increases by one
-* Once the sell by date has passed, Quality increases twice as fast
-* Quality never more than 50
-
-Backstage passes
-* Quality increases by 1 when there are 11 <= sellIn days
-* Quality increases by 2 when there are 6 <= sellIn days < 11
-* Quality increases by 3 when there are 0 < sellIn days < 5
-* Quality drops to 0 after concert
-* Quality never more than 50
-* Quality never negative
-
-Conjured
-
-
-Other
-* Quality decreases by one
-* Quality never negative
-* Once the sell by date has been reached, quality degrades twice as fast
-
-
-Questions
-- updatequality method once a day?
-- All valid inputs? Spelling mistakes
-- What value is Sulfuras sellIn date given as? Does it matter if it changes? Just ignored?
-  Input of 80 always correct?
-- All numbers integers? Not strings?
-
-
-======================================
-Gilded Rose Requirements Specification
-======================================
+The requirements specification is as follows: 
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
 prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
@@ -55,24 +16,24 @@ have a system in place that updates our inventory for us. It was developed by a 
 Leeroy, who has moved on to new adventures. Your task is to add the new feature to our system so that
 we can begin selling a new category of items. First an introduction to our system:
 
-	- All items have a SellIn value which denotes the number of days we have to sell the item
-	- All items have a Quality value which denotes how valuable the item is
-	- At the end of each day our system lowers both values for every item
+- All items have a SellIn value which denotes the number of days we have to sell the item
+- All items have a Quality value which denotes how valuable the item is
+- At the end of each day our system lowers both values for every item
 
 Pretty simple, right? Well this is where it gets interesting:
 
-	- Once the sell by date has passed, Quality degrades twice as fast
-	- The Quality of an item is never negative
-	- "Aged Brie" actually increases in Quality the older it gets
-	- The Quality of an item is never more than 50
-	- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-	- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+- Once the sell by date has passed, Quality degrades twice as fast
+- The Quality of an item is never negative
+- "Aged Brie" actually increases in Quality the older it gets
+- The Quality of an item is never more than 50
+- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
 	Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
 	Quality drops to 0 after the concert
 
 We have recently signed a supplier of conjured items. This requires an update to our system:
 
-	- "Conjured" items degrade in Quality twice as fast as normal items
+- "Conjured" items degrade in Quality twice as fast as normal items
 
 Feel free to make any changes to the UpdateQuality method and add any new code as long as everything
 still works correctly. However, do not alter the Item class or Items property as those belong to the
@@ -82,3 +43,82 @@ for you).
 
 Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
 legendary item and as such its Quality is 80 and it never alters.
+
+## Process
+
+I decided to try the JavaScript variant for this tech test, as it is a language I had recently started learning,
+but wanted to improve on.
+
+This is the approach I took for designing and creating this solution:
+
+- Set up repo:
+  	- Jasmine for testing
+	- ESLint for code quality
+
+- Read the legacy code, and along with the requirements specification, categorise the
+characteristics of each of the different types of items:
+
+| Item  | Characteristic(s) |
+| ------------- | ------------- |
+| All  | sellIn decreases by one  |
+|  | Never changes in quality (always 80)Never has to be sold |
+| | |
+| Sulfuras | Never changes in quality (always 80) |
+|  | Never has to be sold |
+| | |
+| Aged Brie | Quality increases by one|
+| | Once the sell by date has passed, Quality increases twice as fast |
+| | Quality never more than 50 |
+| | |
+| Backstage passes | Backstage passes | Quality increases by 1 when there are 11 <= sellIn days
+| | Quality increases by 2 when there are 6 <= sellIn days < 11
+| | Quality increases by 3 when there are 0 < sellIn days < 5
+| | Quality drops to 0 after concert
+| | Quality never more than 50
+| | Quality never negative|
+| | |
+| Other | Quality decreases by one |
+| | Quality never negative |
+| | Once the sell by date has been reached, quality degrades twice as fast |
+| | |
+| Conjured| As per Other, but quality decreases twice as fast |
+| | |
+
+- Research all the World of Warcraft references ;)
+
+- Start writing the feature and units tests for each item, and for a variety of items together.
+	- I did not to touch the legacy code at all until I was sure
+	that my tests were completely covering all the possible outcomes. This was to give me
+	confidence that no functionality was lost in the next stage.
+
+- Refactor the legacy code, whilst still adhering to the tests I had written:
+    - Methods were made to adhere to the Single Responsibility Principle as much as possible.
+  - As many methods as possible were made private within their respective classes.
+
+- Address the additional "Conjured" items requirement, using TDD.
+
+## <a name="running_the_program">Running the program</a>
+
+### Setup
+```
+$ git clone https://github.com/jasylwong/gilded_rose_js
+$ cd gilded_rose_js
+```
+
+### Testing and running
+```
+$ open SpecRunner.html # This displays the test statuses on the webpage
+```
+
+### Example usage in the browser console
+
+Open the SpecRunner.html file as per the last section, and enter your preferred browser's console.
+
+```
+> const guanciale = new Item("Guanciale", 1, 1) 
+> const agedBrie = new Item("Aged Brie", 2, 1) 
+> const backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 1) 
+> const conjured = new Item("Conjured Mana Cake", 4, 1) 
+> const gildedRose = new Shop( [guanciale, agedBrie, backstagePass, conjured]);
+> const items = gildedRose.updateQuality();
+```
