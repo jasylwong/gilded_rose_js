@@ -3,6 +3,9 @@ function Shop (items = []) {
 }
 
 Shop.prototype.updateQuality = function () {
+  const StandardDegradeRate = 1;
+  const MaxQuality = 50;
+
   const increaseQuality = function (item) {
     item.quality += qualityChangeRate(item)
   }
@@ -12,7 +15,7 @@ Shop.prototype.updateQuality = function () {
   }
 
   const qualityChangeRate = function (item) {
-    return passedSellByDate(item) ? 2 : 1
+    return passedSellByDate(item) ? StandardDegradeRate * 2 : StandardDegradeRate;
   }
 
   const backstagePass = function (item) {
@@ -52,7 +55,7 @@ Shop.prototype.updateQuality = function () {
 
     this.items[i].sellIn--
 
-    this.items[i].quality = Math.min(this.items[i].quality, 50)
+    this.items[i].quality = Math.min(this.items[i].quality, MaxQuality)
     this.items[i].quality = Math.max(this.items[i].quality, 0)
   }
   return this.items
