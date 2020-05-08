@@ -134,12 +134,12 @@ I wanted to use came easily:
 
 (Which now that I look back at it, isn't that far from the original TDD cycle 😉 )
 
-It also took me quite a while to get around my head around all those nested if/else conditionals!
+It also took me quite a while to get my head around all those nested if/else conditionals!
 What I found helpful was making each type of item a sub-title in my notepad. I then went through the code, listing each item characteristic down as I went.
 
-Another major hurdle for me was using JavaScript, with Ruby being my programming "mother tongue".
+Another major hurdle for me was being fairly new to JavaScript, with Ruby being my programming "mother tongue".
 This proved challenging for both reading the legacy code, and writing my own code. Lots of time was
-spent researching and experimenting with syntax new to me. Key finding: Ruby and JS have lots of differences!
+spent researching and experimenting with unfamiliar syntax. Key finding: Ruby and JS have lots of differences!
 
 Something else I'm still developing is the ability to make judgement calls where multiple 'good coding practices'
 may conflict. For example, I tried to keep classes and objects as short as possible, but still adhere to
