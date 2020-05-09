@@ -5,6 +5,8 @@ function Shop (items = []) {
 Shop.prototype.updateQuality = function () {
   const STANDARD_DEGRADE_RATE = 1;
   const MAX_QUALITY = 50;
+  const BSTAGE_PASS_UPPER_LIM = 11;
+  const BSTAGE_PASS_LOWER_LIM = 6;
 
   const increaseQuality = function (item) {
     item.quality += qualityChangeRate(item)
@@ -19,9 +21,9 @@ Shop.prototype.updateQuality = function () {
   }
 
   const backstagePass = function (item) {
-    if (item.sellIn >= 11) {
+    if (item.sellIn >= BSTAGE_PASS_UPPER_LIM) {
       increaseQuality(item)
-    } else if (item.sellIn >= 6) {
+    } else if (item.sellIn >= BSTAGE_PASS_LOWER_LIM) {
       [1, 2].forEach(function () { increaseQuality(item) })
     } else if (item.sellIn > 0) {
       [1, 2, 3].forEach(function () { increaseQuality(item) })

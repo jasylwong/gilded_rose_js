@@ -128,9 +128,10 @@ Open the SpecRunner.html file as per the last section, and enter your preferred 
 I found this a really difficult task, but actually also really enjoyed it in the process. 
 It took me a while to fully get to grips with what the objective was. However, once I did, the strategy
 I wanted to use came easily: 
-1. Get passing tests with the legacy code
-2. Refactor the legacy code to ensure my tests remain green
-3. Refactor my own code
+1. Check for any errors or parts not working in the legacy code
+2. Get passing tests with the legacy code
+3. Refactor the legacy code to ensure my tests remain green
+4. Refactor my own code
 
 (Which now that I look back at it, isn't that far from the original TDD cycle 😉 )
 
